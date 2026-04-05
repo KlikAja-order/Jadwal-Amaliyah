@@ -1,360 +1,299 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jadwal Amaliyah NU</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Noto+Naskh+Arabic:wght@700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-    <style>
-        :root {
-            --nu-green: #045d40;
-            --nu-green-dark: #034630;
-            --nu-gold: #d4af37;
-            --pure-white: #ffffff;
-            --soft-gray: #f8f9fa;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jadwal Amaliyah NU</title>
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Noto+Naskh+Arabic:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
-        body {
-            font-family: 'Montserrat', sans-serif;
-            background: #e9ecef;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 15px;
-        }
+<style>
+:root {
+    --nu-green: #045d40;
+    --nu-green-dark: #034630;
+    --nu-gold: #d4af37;
+    --pure-white: #ffffff;
+    --soft-gray: #f8f9fa;
+}
 
-        #capture-area {
-            width: 100%;
-            max-width: 500px;
-            background-color: var(--pure-white);
-            position: relative;
-            padding-bottom: 20px;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            border: 8px solid var(--nu-green);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
-        }
+* { margin:0; padding:0; box-sizing:border-box; }
 
-        #capture-area::before {
-            content: "";
-            position: absolute;
-            top: 2px; left: 2px; right: 2px; bottom: 2px;
-            border: 3px solid var(--nu-gold);
-            pointer-events: none;
-            z-index: 10;
-        }
+body {
+    font-family: 'Montserrat', sans-serif;
+    background: #e9ecef;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    padding:15px;
+}
 
-        .header-box {
-            background: var(--nu-green);
-            color: white;
-            padding: 15px 10px;
-            text-align: center;
-            position: relative;
-            background-image: url('arabesque.png');
-        }
+#capture-area {
+    width:100%;
+    max-width:500px;
+    background:#fff;
+    position:relative;
+    padding-bottom:25px;
+    border:8px solid var(--nu-green);
+    box-shadow:0 15px 40px rgba(0,0,0,0.2);
+}
 
-        .nu-logo-text {
-            font-family: 'Noto Naskh Arabic', serif;
-            font-size: 1.2rem;
-            color: var(--nu-gold);
-            margin-bottom: 2px;
-        }
+#capture-area::before {
+    content:"";
+    position:absolute;
+    top:2px; left:2px; right:2px; bottom:2px;
+    border:3px solid var(--nu-gold);
+}
 
-        .title-main {
-            font-size: 1.5rem;
-            font-weight: 800;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
+.header-box {
+    background:var(--nu-green);
+    color:#fff;
+    padding:15px 10px;
+    text-align:center;
+}
 
-        .hijri-strip {
-            background: var(--nu-gold);
-            color: var(--nu-green-dark);
-            font-weight: 700;
-            font-size: 0.6rem;
-            display: inline-block;
-            padding: 2px 12px;
-            border-radius: 20px;
-            margin-top: 5px;
-        }
+.nu-logo-text {
+    font-family:'Noto Naskh Arabic';
+    font-size:1.3rem;
+    color:var(--nu-gold);
+}
 
-        .sub-header {
-            font-size: 0.75rem;
-            font-weight: 600;
-            margin-top: 10px;
-            color: rgba(255,255,255,0.9);
-            text-transform: uppercase;
-        }
+.title-main {
+    font-size:1.6rem;
+    font-weight:800;
+}
 
-        .quotes {
-            font-style: italic;
-            font-size: 0.65rem;
-            font-weight: 600;
-            color: var(--nu-green-dark);
-            padding: 10px 20px;
-            text-align: center;
-            line-height: 1.3;
-        }
+.hijri-strip {
+    background:var(--nu-gold);
+    color:var(--nu-green-dark);
+    font-size:0.7rem;
+    padding:3px 12px;
+    border-radius:20px;
+    margin-top:5px;
+    display:inline-block;
+}
 
-        .star-divider {
-            color: var(--nu-gold);
-            font-size: 1rem;
-            text-align: center;
-            margin-bottom: 5px;
-        }
+.sub-header {
+    font-size:0.8rem;
+    margin-top:10px;
+}
 
-        .table-section { width: 96%; margin: 5px auto; }
+.quotes {
+    font-style:italic;
+    font-size:0.75rem;
+    padding:12px;
+    text-align:center;
+    line-height:1.5;
+}
 
-        .table-header {
-            background: var(--nu-green);
-            display: grid;
-            grid-template-columns: 1.6fr 1.6fr 1.6fr;
-            padding: 8px;
-            color: var(--pure-white);
-            font-weight: 700;
-            font-size: 0.6rem;
-            text-transform: uppercase;
-            text-align: center;
-            letter-spacing: 0.5px;
-            border-bottom: 2px solid var(--nu-gold);
-            border-left: 1px solid #d4af37; border-right: 1px solid #d4af37;
-        }
+.table-header, .table-row {
+    display:grid;
+    grid-template-columns:1.6fr 1.6fr 1.6fr;
+    text-align:center;
+}
 
-        .table-row {
-            background: var(--soft-gray);
-            display: grid;
-            grid-template-columns: 1.6fr 1.6fr 1.6fr;
-            padding: 10px 5px;
-            border-bottom: 1px solid #dee2e6;
-            color: #333;
-            font-size: 0.6rem;
-            align-items: center;
-            position: relative;
-            letter-spacing: 0.5px;
-        }
+.table-header {
+    background:var(--nu-green);
+    color:#fff;
+    font-size:0.7rem;
+    padding:8px;
+}
 
-        .col-date { text-align: center; font-weight: 600; color: var(--nu-green); padding-left: 5px; }
-        .col-time { text-align: center; font-weight: 600; font-size: 0.6rem; border-left: 1px solid #ddd; border-right: 1px solid #ddd; white-space: nowrap;}
-        .col-event { text-align: center; font-weight: 600; padding-right: 5px; }
+.table-row {
+    background:var(--soft-gray);
+    padding:12px 6px;
+    font-size:0.75rem;
+    line-height:1.4;
+    transition:all 0.3s ease;
+}
 
-        .footer-info {
-            text-align: center;
-            font-size: 0.65rem;
-            color: #666;
-            margin-top: 15px;
-            font-weight: 600;
-        }
+.table-row:hover {
+    background:#e2e6ea;
+}
 
-        .admin-panel {
-            width: 100%; max-width: 500px;
-            background: #fff; padding: 20px;
-            margin-top: 15px; border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        }
+.delete-btn {
+    position:absolute;
+    right:5px;
+    top:50%;
+    transform:translateY(-50%);
+    background:#ff4757;
+    color:#fff;
+    border:none;
+    border-radius:5px;
+    padding:4px 7px;
+    font-size:10px;
+    cursor:pointer;
+}
 
-        input, select { width: 100%; padding: 10px; margin: 5px 0 12px 0; border: 1px solid #ccc; border-radius: 4px; }
-        .btn { width: 100%; padding: 12px; border: none; border-radius: 4px; font-weight: 700; cursor: pointer; }
-        .btn-save { background: var(--nu-green); color: white; margin-bottom: 8px; }
-        .btn-dl { background: var(--nu-gold); color: #000; }
-        .btn-clear { background: #ff4757; color: white; margin-bottom: 8px; font-size: 0.75rem; padding: 8px; }
+.footer-info {
+    text-align:center;
+    font-size:0.7rem;
+    margin-top:10px;
+}
 
-        .delete-btn {
-            position: absolute; right: 2px; top: 50%; transform: translateY(-50%);
-            background: #ff4757; color: white; border: none;
-            border-radius: 4px; padding: 2px 6px; font-size: 9px;
-            cursor: pointer; z-index: 20;
-        }
-    </style>
+.watermark {
+    text-align:center;
+    font-size:0.6rem;
+    opacity:0.6;
+    margin-top:5px;
+}
+
+.admin-panel {
+    width:100%;
+    max-width:500px;
+    background:#fff;
+    padding:20px;
+    margin-top:15px;
+    border-radius:8px;
+}
+
+input, select {
+    width:100%;
+    padding:10px;
+    margin-bottom:10px;
+}
+
+.btn {
+    width:100%;
+    padding:12px;
+    border:none;
+    margin-bottom:8px;
+    font-weight:700;
+    cursor:pointer;
+}
+
+.btn-save { background:var(--nu-green); color:#fff; }
+.btn-dl { background:var(--nu-gold); }
+.btn-clear { background:#ff4757; color:#fff; }
+
+</style>
 </head>
+
 <body>
 
 <div id="capture-area">
     <div class="header-box">
         <div class="nu-logo-text">النَّهْضِيَّة</div>
         <div class="title-main">Jadwal Amaliyah</div>
-        <div class="hijri-strip" id="hijri-display">SYAWAL 1447 H / 2026 M</div>
-        <div class="sub-header" id="auto-header">... | ...</div>
-    </div>
-    
-    <div class="star-divider">
-        <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> 
-        <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> 
-        <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i>
+        <div class="hijri-strip" id="hijri-display"></div>
+        <div class="sub-header" id="auto-header"></div>
     </div>
 
     <p class="quotes">"Menjaga tradisi dan syiar amaliyah Ahlus Sunnah Wal Jamaah An-Nahdliyyah"</p>
 
-    <div class="table-section">
-        <div class="table-header">
-            <div>Hari & Tanggal</div>
-            <div>Waktu</div>
-            <div>Acara</div>
-        </div>
-        <div id="list-container"></div>
+    <div class="table-header">
+        <div>Hari & Tanggal</div>
+        <div>Waktu</div>
+        <div>Acara</div>
     </div>
 
-    <div class="footer-info">
-        Jama'ah Amaliyah &bull; Ahlus Sunnah Wal Jamaah
-    </div>
+    <div id="list-container"></div>
+
+    <div class="footer-info">Jama'ah Amaliyah</div>
+    <div class="watermark">Generated by Amaliyah App</div>
 </div>
 
 <div class="admin-panel">
-    <label>Bulan Hijriyah (Manual)</label>
-    <input type="text" id="f-hijri" placeholder="Contoh: SYAWAL 1447 H / 2026 M" oninput="updateHijri()">
+<input type="text" id="f-hijri" placeholder="Hijriyah">
 
-    <label>Pilih Tanggal</label>
-    <input type="date" id="f-date">
-    
-    <label>Waktu Amaliyah</label>
-    <select id="f-time-select" onchange="toggleManual()">
-        <option value="Ba'da Dzuhur">Ba'da Dzuhur</option>
-        <option value="Ba'da Ashar">Ba'da Ashar</option>
-        <option value="Ba'da Magrib">Ba'da Magrib</option>
-        <option value="Ba'da Isya'">Ba'da Isya'</option>
-        <option value="MANUAL">Input Jam Manual</option>
-    </select>
-    <input type="text" id="f-time-manual" placeholder="Contoh: 19:30 WIB" style="display:none;">
+<input type="date" id="f-date">
 
-    <label>Nama Kegiatan</label>
-    <input type="text" id="f-event" placeholder="Maulid / Tahlil / Doa Bersama">
+<select id="f-time-select" onchange="toggleManual()">
+<option>Ba'da Dzuhur</option>
+<option>Ba'da Ashar</option>
+<option>Ba'da Magrib</option>
+<option>Ba'da Isya'</option>
+<option value="MANUAL">Manual</option>
+</select>
 
-    <button class="btn btn-save" onclick="saveData()">SIMPAN KE JADWAL</button>
-    <button class="btn btn-dl" onclick="download()">DOWNLOAD POSTER HD</button>
-    <button class="btn btn-clear" onclick="clearAll()">HAPUS SEMUA DATA</button>
+<input type="text" id="f-time-manual" placeholder="19:30 WIB" style="display:none;">
+
+<input type="text" id="f-event" placeholder="Nama kegiatan">
+
+<button class="btn btn-save" onclick="saveData()">SIMPAN</button>
+<button class="btn btn-dl" onclick="download()">DOWNLOAD</button>
+<button class="btn btn-clear" onclick="clearAll()">HAPUS</button>
 </div>
 
 <script>
-    let schedule = JSON.parse(localStorage.getItem('amaliyah_nu_v2')) || [];
-    let hijriText = localStorage.getItem('amaliyah_hijri_v2') || "SYAWAL 1447 H / 2026 M";
-    
-    const timeOrder = { "Ba'da Dzuhur": 1, "Ba'da Ashar": 2, "Ba'da Magrib": 3, "Ba'da Isya'": 4, "MANUAL": 5 };
+let schedule = JSON.parse(localStorage.getItem('data')) || [];
 
-    // Set initial Hijri value
-    document.getElementById('f-hijri').value = hijriText;
+function toggleManual(){
+    document.getElementById('f-time-manual').style.display =
+    document.getElementById('f-time-select').value === 'MANUAL' ? 'block':'none';
+}
 
-    function updateHijri() {
-        const val = document.getElementById('f-hijri').value;
-        document.getElementById('hijri-display').innerText = val;
-        localStorage.setItem('amaliyah_hijri_v2', val);
-    }
+function parseTime(t){
+    if(t.includes(':')) return t;
+    return t;
+}
 
-    function toggleManual() {
-        const s = document.getElementById('f-time-select');
-        document.getElementById('f-time-manual').style.display = (s.value === 'MANUAL' ? 'block' : 'none');
-    }
+function render(){
+    let c = document.getElementById('list-container');
+    c.innerHTML='';
 
-    function getWeekOfMonth(date) {
-        const d = new Date(date);
-        const firstDay = new Date(d.getFullYear(), d.getMonth(), 1).getDay();
-        return Math.ceil((d.getDate() + firstDay) / 7);
-    }
+    schedule.sort((a,b)=> new Date(a.date)-new Date(b.date));
 
-    const formatMinggu = (n) => ["PERTAMA", "KEDUA", "KETIGA", "KEEMPAT", "KELIMA"][n-1] || "TAMBAHAN";
-
-    function render() {
-        const container = document.getElementById('list-container');
-        const autoHeader = document.getElementById('auto-header');
-        const hijriDisplay = document.getElementById('hijri-display');
-        
-        container.innerHTML = '';
-        hijriDisplay.innerText = document.getElementById('f-hijri').value;
-
-        schedule.sort((a, b) => {
-            if (a.date !== b.date) return new Date(a.date) - new Date(b.date);
-            return (timeOrder[a.type] || 4) - (timeOrder[b.type] || 4);
-        });
-
-        if(schedule.length > 0) {
-            const firstEntry = new Date(schedule[0].date);
-            const mingguKe = formatMinggu(getWeekOfMonth(firstEntry));
-            const bulanThn = firstEntry.toLocaleDateString('id-ID', { month: 'long', year: 'numeric' }).toUpperCase();
-            autoHeader.innerText = `MINGGU ${mingguKe} | ${bulanThn}`;
-        } else {
-            autoHeader.innerText = "... | ...";
-        }
-
-        schedule.forEach((item, index) => {
-            const d = new Date(item.date);
-            const tglFormatted = d.toLocaleDateString('id-ID', { weekday: 'short', day: '2-digit', month: 'short', year: 'numeric' });
-            
-            container.innerHTML += `
-                <div class="table-row">
-                    <button class="delete-btn" data-html2canvas-ignore="true" onclick="remove(${index})">x</button>
-                    <div class="col-date">${tglFormatted}</div>
-                    <div class="col-time">${item.time}</div>
-                    <div class="col-event">${item.event}</div>
-                </div>
-            `;
-        });
-    }
-
-    function saveData() {
-        const date = document.getElementById('f-date').value;
-        const type = document.getElementById('f-time-select').value;
-        const manual = document.getElementById('f-time-manual').value;
-        const event = document.getElementById('f-event').value;
-        const finalTime = (type === 'MANUAL' ? manual : type);
-
-        if(!date || !event) return alert("Mohon lengkapi data!");
-
-        const isExist = schedule.find(item => item.date === date && item.time === finalTime);
-        if(isExist) {
-            alert(`⚠️ PERINGATAN: Jadwal untuk ${finalTime} pada tanggal tersebut sudah terisi!`);
-            return;
-        }
-
-        schedule.push({
-            date: date,
-            time: finalTime,
-            type: type,
-            event: event
-        });
-
-        localStorage.setItem('amaliyah_nu_v2', JSON.stringify(schedule));
-        render();
-        document.getElementById('f-event').value = '';
-    }
-
-    function remove(idx) {
-        if(confirm("Hapus jadwal ini?")) {
-            schedule.splice(idx, 1);
-            localStorage.setItem('amaliyah_nu_v2', JSON.stringify(schedule));
-            render();
-        }
-    }
-
-    function clearAll() {
-        if(confirm("Hapus seluruh jadwal? Tindakan ini tidak bisa dibatalkan.")) {
-            schedule = [];
-            localStorage.setItem('amaliyah_nu_v2', JSON.stringify(schedule));
-            render();
-        }
-    }
-
-    async function download() {
-    const area = document.getElementById('capture-area');
-
-    // ⏳ Tunggu font benar-benar siap
-    await document.fonts.ready;
-
-    html2canvas(area, {
-        scale: 5,
-        useCORS: true,
-        letterRendering: true
-    }).then(canvas => {
-        const link = document.createElement('a');
-        link.download = `Jadwal-Amaliyah-NU-${Date.now()}.jpg`;
-        link.href = canvas.toDataURL('image/jpeg', 1.0);
-        link.click();
+    schedule.forEach((i,x)=>{
+        c.innerHTML+=`
+        <div class="table-row">
+        <button class="delete-btn" onclick="remove(${x})">x</button>
+        <div>${new Date(i.date).toLocaleDateString('id-ID')}</div>
+        <div>${i.time}</div>
+        <div>${i.event}</div>
+        </div>`;
     });
-    }
+}
+
+function saveData(){
+    let d = f-date.value;
+    let t = f-time-select.value==='MANUAL'?f-time-manual.value:f-time-select.value;
+    let e = f-event.value;
+
+    if(!d||!e) return alert("Lengkapi data!");
+
+    schedule.push({date:d,time:t,event:e});
+    localStorage.setItem('data',JSON.stringify(schedule));
+
+    alert("✅ Berhasil disimpan");
+
+    f-date.value='';
+    f-event.value='';
+    f-time-manual.value='';
 
     render();
+}
+
+function remove(i){
+    schedule.splice(i,1);
+    localStorage.setItem('data',JSON.stringify(schedule));
+    render();
+}
+
+function clearAll(){
+    if(confirm("Hapus semua?")){
+        schedule=[];
+        localStorage.setItem('data',JSON.stringify(schedule));
+        render();
+    }
+}
+
+async function download(){
+    await document.fonts.ready;
+
+    html2canvas(document.getElementById('capture-area'),{
+        scale:5,
+        backgroundColor:"#ffffff"
+    }).then(c=>{
+        let a=document.createElement('a');
+        a.download="jadwal.jpg";
+        a.href=c.toDataURL("image/jpeg",1);
+        a.click();
+    });
+}
+
+render();
 </script>
 
 </body>
