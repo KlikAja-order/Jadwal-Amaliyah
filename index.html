@@ -340,13 +340,13 @@
     await document.fonts.ready;
 
     html2canvas(area, {
-        scale: 4,
+        scale: 5,
         useCORS: true,
         letterRendering: true
     }).then(canvas => {
         const link = document.createElement('a');
         link.download = `Jadwal-Amaliyah-NU-${Date.now()}.jpg`;
-        link.href = canvas.toDataURL('image/jpeg', 1.0);
+        link.href = canvas.toDataURL('image/jpeg', 1.2);
         link.click();
     });
     }
