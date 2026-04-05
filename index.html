@@ -281,7 +281,7 @@
             
             container.innerHTML += `
                 <div class="table-row">
-                    <button class="delete-btn" data-html2canvas-ignore="true" onclick="remove(${index})">HAPUS</button>
+                    <button class="delete-btn" data-html2canvas-ignore="true" onclick="remove(${index})">x</button>
                     <div class="col-date">${tglFormatted}</div>
                     <div class="col-time">${item.time}</div>
                     <div class="col-event">${item.event}</div>
@@ -346,7 +346,7 @@
     }).then(canvas => {
         const link = document.createElement('a');
         link.download = `Jadwal-Amaliyah-NU-${Date.now()}.jpg`;
-        link.href = canvas.toDataURL('image/jpeg', 1.2);
+        link.href = canvas.toDataURL('image/jpeg', 1.0);
         link.click();
     });
     }
