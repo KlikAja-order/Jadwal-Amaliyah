@@ -210,9 +210,10 @@
     
     <label>Waktu Amaliyah</label>
     <select id="f-time-select" onchange="toggleManual()">
-        <option value="Setelah Ashar">Setelah Ashar</option>
-        <option value="Setelah Magrib">Setelah Magrib</option>
-        <option value="Setelah Isya'">Setelah Isya'</option>
+        <option value="Ba'da Dzuhur">Ba'da Dzuhur</option>
+        <option value="Ba'da Ashar">Ba'da Ashar</option>
+        <option value="Ba'da Magrib">Ba'da Magrib</option>
+        <option value="Ba'da Isya'">Ba'da Isya'</option>
         <option value="MANUAL">Input Jam Manual</option>
     </select>
     <input type="text" id="f-time-manual" placeholder="Contoh: 19:30 WIB" style="display:none;">
@@ -229,7 +230,7 @@
     let schedule = JSON.parse(localStorage.getItem('amaliyah_nu_v2')) || [];
     let hijriText = localStorage.getItem('amaliyah_hijri_v2') || "SYAWAL 1447 H / 2026 M";
     
-    const timeOrder = { "Setelah Ashar": 1, "Setelah Magrib": 2, "Setelah Isya'": 3, "MANUAL": 4 };
+    const timeOrder = { "Ba'da Dzuhur": 1, "Ba'da Ashar": 2, "Ba'da Magrib": 3, "Ba'da Isya'": 4, "MANUAL": 5 };
 
     // Set initial Hijri value
     document.getElementById('f-hijri').value = hijriText;
